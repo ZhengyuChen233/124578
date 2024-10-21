@@ -1,1 +1,13 @@
 nihao
+BA_data = pd.read_csv('OIL.txt')
+BA_data['<Date> <Time>'] = pd.to_datetime(BA_data['<Date> <Time>'].str[:19],
+                                          format='%Y-%m-%d %H:%M:%S', errors='coerce')
+fig, ax = plt.subplots()
+ax.plot(BA_data['<Date> <Time>'],BA_data['  <Bucket T>'])
+ax.set_xlabel('Time / hh:mm',fontdict={'fontsize':14})
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+ax.set_ylabel('Bucket temperature / \u00B0C',fontdict={'fontsize':14})
+fig.suptitle('Oil',fontsize=21,fontweight='bold')
+ax.set_title('Experiment date: 2019-10-09',fontdict={'fontsize':16})
+plt.tight_layout() 
+plt.show() 
